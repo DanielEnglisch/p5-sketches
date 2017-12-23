@@ -1,44 +1,38 @@
 // Input settings
-var dx = -0.7453;
-var dy = 0.1127;
-var minR = - 6.5E-4;
-var maxIterations = 500;
+//var dx = -0.7453;
+//var dy = 0.1127;
+//var minR = - 6.5E-4;
+
+var dx = 0;
+var dy = 0;
+var minR = -2;
+
+var maxIterations = 100;
 
 
 var maxR = -minR;
   
 
-// Interface
-var iter;
-var button;
-
 function setup() {
-  createCanvas(500,500);
+  createCanvas(1000,1000);
   pixelDensity(1);
   loadPixels();  
 
-  // Setup interface
-  iter = createInput('500');
-  iter.position(10, 510);
-  
-  button = createButton('Recalculate');
-  button.position(iter.x + iter.width+5, iter.y);
-  button.mousePressed(setValues);
-  calculate();
+  calculate(); 
 
 }
 
-function setValues(){
-  if(maxIterations == iter.value())
-    return;
-  maxIterations = iter.value();
-  calculate();
-}
 
 function calculate() {
   // For every pixel
   for(var x = 0; x < width; x++){
+          
+          if(x % 10 == 0)
+            console.log("Rendering "+x+"/"+y);
+
     for(var y = 0; y < height; y++){
+      
+      
       // Memory mapping
       var pix = (x+y*width)*4;
 
