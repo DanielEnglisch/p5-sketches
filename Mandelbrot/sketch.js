@@ -7,7 +7,7 @@ var dx = 0;
 var dy = 0;
 var minR = -2;
 
-var maxIterations = 100;
+var maxIterations = 1000;
 
 
 var maxR = -minR;
@@ -26,10 +26,6 @@ function setup() {
 function calculate() {
   // For every pixel
   for(var x = 0; x < width; x++){
-          
-          if(x % 10 == 0)
-            console.log("Rendering "+x+"/"+y);
-
     for(var y = 0; y < height; y++){
       
       
@@ -78,9 +74,12 @@ function calculate() {
       pixels[pix+1] = brightness + n % 255;
       pixels[pix+2] = brightness * 1.2 % 255;
       pixels[pix+3] = 255 - 0.5 * n   %255;
+
+      
       
     }
   }
-
   updatePixels();
+  
+
 }
