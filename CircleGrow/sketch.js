@@ -1,7 +1,7 @@
 var circles = [];
 
 function setup() {
-  createCanvas(500, 500);
+  createCanvas(1000, 1000);
 
   circles.push( new Circle(width/2,height/2));
 }
@@ -48,8 +48,10 @@ function Circle(x,y){
   this.pos = createVector(x,y);
   this.r = 1;
   this.draw = function(){
-    stroke(map(this.pos.x,0,width,0,255),map(this.pos.y,0,height,0,255),map(this.pos.x+2,0,width,0,255));
-    ellipse(this.pos.x, this.pos.y, this.r,this.r);
+    //stroke(map(this.pos.x,0,width,0,255),map(this.pos.y,0,height,0,255),map(this.pos.x+2,0,width,0,255));
+    stroke(255-map(this.r,0,100,0,255));
+		
+		ellipse(this.pos.x, this.pos.y, this.r*2,this.r*2);
   }
   this.grow = function(){
 
@@ -71,7 +73,7 @@ function Circle(x,y){
   }
 
   this.intersects = function(nx,ny,nr){
-    return Math.hypot(this.pos.x-nx, this.pos.y-ny) <= (this.r + nr);
+    return Math.hypot(this.pos.x-nx, this.pos.y-ny) <= (this.r + nr)+2;
   }
 
 }
