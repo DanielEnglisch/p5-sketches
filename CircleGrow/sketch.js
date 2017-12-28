@@ -48,8 +48,8 @@ function Circle(x,y){
   this.pos = createVector(x,y);
   this.r = 1;
   this.draw = function(){
-    //stroke(map(this.pos.x,0,width,0,255),map(this.pos.y,0,height,0,255),map(this.pos.x+2,0,width,0,255));
-    stroke(255-map(this.r,0,100,0,255));
+    stroke(map(this.pos.x,0,width,0,255),map(this.pos.y,0,height,0,255),map(this.pos.x+2,0,width,0,255));
+    //stroke(255-map(this.r,0,100,0,255));
 		
 		ellipse(this.pos.x, this.pos.y, this.r*2,this.r*2);
   }

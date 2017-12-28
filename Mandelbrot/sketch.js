@@ -1,24 +1,70 @@
 // Input settings
-//var dx = -0.7453;
-//var dy = 0.1127;
-//var minR = - 6.5E-4;
-
 var dx = 0;
 var dy = 0;
 var minR = -2;
 
-var maxIterations = 1000;
+var maxIterations = 500;
 
 
 var maxR = -minR;
-  
+
 
 function setup() {
+
   createCanvas(1000,1000);
   pixelDensity(1);
   loadPixels();  
+  
+  var button1 = createButton('Spiral');
+  button1.position(10 ,10);
+  button1.mousePressed(()=>{
+    dx = -0.7453;
+    dy = 0.1127;
+    minR = - 6.5E-4;
+    maxR = -minR;
+    calculate(); 
 
-  calculate(); 
+  });
+
+
+   var button3 = createButton('Minibrot');
+  button3.position(80 ,10);
+  button3.mousePressed(()=>{
+    dx =  -0.16;
+    dy = 1.0405;
+    minR = 0.026;
+    maxR = -minR;
+    calculate(); 
+
+  });
+
+  
+    
+    var button2 = createButton('Tentacles');
+  button2.position(160 ,10);
+  button2.mousePressed(()=>{
+    dx =  -0.745428;
+    dy = 0.113009;
+    minR = -3.0E-5;
+    maxR = -minR;
+    calculate(); 
+
+  });
+  
+     var button4 = createButton('Home');
+  button4.position(245 ,10);
+  button4.mousePressed(()=>{
+    dx =  0;
+    dy = 0;
+    minR = -2;
+    maxR = -minR;
+    calculate(); 
+
+  });
+
+  
+  calculate();
+
 
 }
 
@@ -26,6 +72,9 @@ function setup() {
 function calculate() {
   // For every pixel
   for(var x = 0; x < width; x++){
+    console.log("Progress: " + ((x*height)  /(width*height))*100 + "%");
+
+    
     for(var y = 0; y < height; y++){
       
       
@@ -70,15 +119,17 @@ function calculate() {
        
 
       // RGBA Values of pixel
-      pixels[pix+0] = brightness - 0.5*n % 255;
-      pixels[pix+1] = brightness + n % 255;
-      pixels[pix+2] = brightness * 1.2 % 255;
-      pixels[pix+3] = 255 - 0.5 * n   %255;
+      pixels[pix+0] = brightness *2 %255;
+      pixels[pix+1] = brightness *3%255;
+      pixels[pix+2] = brightness *4%255;
+      pixels[pix+3] = 255;
 
       
       
     }
   }
+
+  
   updatePixels();
   
 
