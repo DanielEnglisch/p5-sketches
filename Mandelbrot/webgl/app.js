@@ -66,12 +66,15 @@ function main() {
     
     var minI = - 6.5E-4+ 0.1127;
     var maxI =  6.5E-4+ 0.1127;
-
     var minR = - 6.5E-4-0.7453;
     var maxR =  6.5E-4-0.7453;
 
-
-
+    /*
+    var minI = - 2;
+    var maxI =  2;
+    var minR = - 2;
+    var maxR =  2;
+*/
     // Create Vertices (2 Triangles)
     var vertexBuffer = gl.createBuffer();
     var vertices = [-1, 1, -1, -1,

@@ -13,36 +13,40 @@ float map(float value, float inMin, float inMax, float outMin, float outMax) {
 
 void main() {
 
-  vec2 c = vec2(
-    gl_FragCoord.x * (maxR-minR) / dimension.x + minR,
-    gl_FragCoord.y * (maxI-minI) / dimension.y + minI
-  );
+  float a = map(gl_FragCoord.x,0.0,dimension.x,minR,maxR);
+  float b = map(gl_FragCoord.y,0.0,dimension.y,minI,maxI);
+  float initialA = a;
+  float initialB = b;
 
-  vec2 z = c;
-  float iterations = 0.0;
+ 
+  float n = 0.0;
   float maxIterations = 10000.0;
   const int maxIterations_int = 10000;
 
   for(int i = 0; i < maxIterations_int;i++){
-    float t = 2.0 * z.x * z.y +c.y;
-    z.x = z.x*z.x-z.y*z.y+c.x;
-    z.y = t;
+    
+    float newA = a*a - b*b;
+    float newB = 2.0*a*b;
 
-    if(z.x*z.x + z.y*z.y > 4.0){
+    a = initialA + newA;
+    b = initialB + newB;
+
+    if(abs(a+b)>4.0){
       break;
     }
-    iterations += 1.0;
+   
+    n += 1.0;
   }
 
-  if(iterations == maxIterations){
+  if(n >= maxIterations){
     discard;
   }else{
-    float normalized =  map(iterations, 0.0, maxIterations,0.0,1.0);
-    float bri = map(sqrt(normalized),0.0,1.0,0.0,1.0);
+    float normalized =  map(n, 0.0, maxIterations,0.0,1.0);
+    float bri = map(sqrt(normalized*50.0),0.0,1.0,0.0,1.0);
     gl_FragColor = vec4(
-      map(2.0*bri,0.0,2.0,0.0,1.0),
-      map(3.0*bri,0.0,3.0,0.0,1.0),
-      map(4.0*bri,0.0,4.0,0.0,1.0),
+      map(bri*n*2.4,0.0,200.0,0.0,1.0),
+      map(bri*n,0.0,130.0,0.0,1.0),
+      map(bri, 0.0,3.0,0.0,1.0),
       1.0);
   }
 
